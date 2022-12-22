@@ -28,6 +28,14 @@ function Header({ isAuthenticated = false }) {
             Home{" "}
           </p>
         </Link>
+        <Link to="/products">
+          <p
+            style={HighLight === "products" ? active : {}}
+            onClick={() => setHighLight("products")}
+          >
+            Products{" "}
+          </p>
+        </Link>
         <Link to="/contact">
           <p
             style={HighLight === "contact" ? active : {}}

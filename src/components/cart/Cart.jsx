@@ -1,8 +1,8 @@
 import React from "react";
 import CartItem from "./CartItem";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { order_actions } from "../../redux/order_slice";
+import Buttons from "../ui/Buttons";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ function Cart() {
           </div>
           <div>
             <h4>Tax</h4>
-            <p>₹{2000 * 0.18}</p>
+            <p>₹{CartPrice * 0.18}</p>
           </div>
           <div>
             <h4>Shipping Charges</h4>
@@ -43,10 +43,11 @@ function Cart() {
           </div>
           <div>
             <h4>Total</h4>
-            <p>₹{2000 + 2000 * 0.18 + 40}</p>
+            <p>₹{CartPrice + CartPrice * 0.18 + 40}</p>
           </div>
-          <Link to="/shipping">Checkout</Link>
         </article>
+        <Buttons link="/products" name="Add More Products" />
+        <Buttons link="/shipping" name="Checkout" />
       </main>
     </section>
   );

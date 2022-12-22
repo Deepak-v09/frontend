@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
-import { Country, State } from "country-state-city";
+import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { user_actions } from "../../redux/user_slice";
-import { Link } from "react-router-dom";
-function Shipping() {
+import { Country, State } from "country-state-city";
+import Buttons from "../ui/Buttons";
+export default function EditShippingAddress() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user_slice.user);
   const houseRef = useRef();
@@ -26,21 +26,7 @@ function Shipping() {
     };
     dispatch(user_actions.AddUserInfo(userInfo));
   }
-  if (user.address) {
-    console.log(user);
-    return (
-      <>
-        <h1>{user.address.house}</h1>
-        <Link to="/confirmorder">
-          <button>Proceed With Address</button>
-        </Link>
-        <Link to="/edit-address">
-          <button>Edit Address</button>
-        </Link>
-        <button>Add Address</button>
-      </>
-    );
-  }
+  console.log(user);
   return (
     <section className="shipping">
       (
@@ -49,15 +35,28 @@ function Shipping() {
         <form onSubmit={addressHandler}>
           <div>
             <label>H.No.</label>
-            <input type="text" placeholder="Enter House No" ref={houseRef} />
+            <input
+              type="text"
+              placeholder="Enter House No"
+              ref={houseRef}
+              defaultValue={user.address && user.address.house}
+            />
           </div>
           <div>
             <label>City</label>
-            <input type="text" placeholder="Enter City" ref={cityRef} />
+            <input
+              type="text"
+              placeholder="Enter City"
+              ref={cityRef}
+              defaultValue={user.address && user.address.city}
+            />
           </div>
           <div>
             <label>Country</label>
-            <select ref={countryRef}>
+            <select
+              ref={countryRef}
+              defaultValue={user.address && user.address.coutry}
+            >
               <option value="">Country</option>
               {Country &&
                 Country.getAllCountries().map((i) => (
@@ -69,7 +68,10 @@ function Shipping() {
           </div>
           <div>
             <label>State</label>
-            <select ref={stateRef}>
+            <select
+              ref={stateRef}
+              defaultValue={user.address && user.address.state}
+            >
               <option value="">State</option>
               {State &&
                 State.getStatesOfCountry("IN").map((i) => (
@@ -81,18 +83,31 @@ function Shipping() {
           </div>
           <div>
             <label>Pin Code</label>
-            <input type="number" placeholder="Enter Pincode" ref={pinRef} />
+            <input
+              type="number"
+              placeholder="Enter Pincode"
+              ref={pinRef}
+              defaultValue={user.address && user.address.pin}
+            />
           </div>
           <div>
             <label>phone No.</label>
-            <input type="number" placeholder="Enter phone No" ref={phoneRef} />
+            <input
+              type="number"
+              placeholder="Enter phone No"
+              ref={phoneRef}
+              defaultValue={user.phone}
+            />
           </div>
-          <button type="submit">Confirm Address</button>
+          <Buttons
+            type="submit"
+            name="Confirm Address"
+            size="sm"
+            link="/confirmorder"
+          />
         </form>
       </main>
       )
     </section>
   );
 }
-
-export default Shipping;

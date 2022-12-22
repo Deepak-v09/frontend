@@ -1,4 +1,5 @@
 import React from "react";
+import Buttons from "../ui/Buttons";
 
 function CartItem(props) {
   return (
@@ -9,10 +10,9 @@ function CartItem(props) {
       </div>
 
       <div>
-        <button onClick={props.decrement}>-</button>
-        {/* <input type="placeholder" readOnly value={props.value} /> */}
+        <Buttons onClick={props.decrement} name="-" size="lg" />
         <p>{props.value}</p>
-        <button onClick={props.increment}>+</button>
+        <Buttons onClick={props.increment} name="+" />
       </div>
     </div>
   );
